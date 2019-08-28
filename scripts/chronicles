@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+command_args=${@:2}
+command_name=$1
+image_name="chronicles"
+image_workdir="/chronicles"
+
+case "$command_name" in
+  setup)
+    docker build \
+      --build-arg uid="$UID" \
+      --build-arg workdir="$image_workdir" \
+      -t "$image_name" .
+  ;;
+  run)
+    docker run --rm -it -v "$PWD":"$image_workdir" "$image_name"
+  ;;
+esac
