@@ -1,10 +1,10 @@
 require "spec_helper"
 
-RSpec.describe Chronicles::Player do
+RSpec.describe Chronicles::Players::Stats do
   describe ".build" do
     it "creates a new player" do
       expect(described_class.build(name: "olaf"))
-        .to be_a_kind_of(Chronicles::Player)
+        .to be_a_kind_of(Chronicles::Players::Stats)
     end
 
     it "builds a healthy adventurer" do
@@ -20,7 +20,7 @@ RSpec.describe Chronicles::Player do
     end
   end
 
-  describe "healthy?" do
+  describe "#healthy?" do
     it "returns true when life is on its maximum" do
       player = described_class.new("olaf", health: 100, max_health: 100)
 
@@ -90,6 +90,16 @@ RSpec.describe Chronicles::Player do
       player.fight
 
       expect(player).to_not be_fighting
+    end
+  end
+
+  describe "#wake_up!" do
+    it "wakes up a sleeping player" do
+      player = described_class.new("olaf")
+      player.take_a_nap
+      player.wake_up
+
+      expect(player).to be_wandering
     end
   end
 
