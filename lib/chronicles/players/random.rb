@@ -9,7 +9,11 @@ module Chronicles
       Action = Struct.new(:success?)
 
       def try_wake_up
-        Action.new(Random.rand(2).zero?)
+        Action.new(::Random.rand(2).zero?)
+      end
+
+      def try_hunt
+        Action.new(::Random.rand(2).zero?)
       end
     end
   end

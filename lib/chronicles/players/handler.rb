@@ -13,9 +13,13 @@ module Chronicles
         ref.ask(:get_player).value
       end
 
+      def self.quit(ref)
+        ref.ask(:quit).value
+      end
+
       def initialize(name, opts)
         @player = Stats.new(name)
-        @random = opts.fetch(:random, Random)
+        @random = opts.fetch(:random, Players::Random.new)
       end
 
       def on_message(message)
@@ -24,8 +28,11 @@ module Chronicles
           @player
         when :act
           Actions.do_action(@player, @random)
-          @player
+        when :quit
+          @player.die
         end
+
+        @player
       end
     end
   end

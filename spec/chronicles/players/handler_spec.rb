@@ -28,6 +28,14 @@ RSpec.describe Chronicles::Players::Handler do
 
       expect(player).to be_a_kind_of(Chronicles::Players::Stats)
     end
+  end
 
+  describe "#quit" do
+    it "forces the player to commit suicide" do
+      handler = described_class.start("Olaf")
+      player = described_class.quit(handler)
+
+      expect(player).to be_dead
+    end
   end
 end
