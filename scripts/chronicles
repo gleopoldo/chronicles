@@ -13,6 +13,6 @@ case "$command_name" in
       -t "$image_name" .
   ;;
   run)
-    docker run --rm -it -v "$PWD":"$image_workdir" "$image_name"
+    docker run --rm -it -v "$PWD":"$image_workdir" -p "40000:40000" "$image_name"
   ;;
 esac

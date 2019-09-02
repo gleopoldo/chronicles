@@ -1,0 +1,28 @@
+en:
+  wandering:
+  - "Searching for gold. Nope! Not this rainbow..."
+  - "Playing dices with dogs. Did they see my poker-face?"
+  - "Counting helmet-looking clouds. Found one. Looks like Odin."
+  - "If I don't have an eye, do I look more like Odin?"
+  - "Hiding in the shadows... lies... more shadows."
+  - "Composing some verses like those ones are not cool"
+  - "Let's drink some beer guys! And find a fight somewhere too."
+
+  hunting:
+  - "Look! Footprints! Let the hunt begin!"
+  - "May Thor join us in this hunting!"
+  - "Very hungry... Hope that this big footprints lead me to nice meat"
+
+  sleeping:
+  - "Boring. All beer is gone. Let's sleep."
+  - "A witch helped me to sleep. I think that I'm going to lose my silver after that..."
+  - "Too much fear of goblins... but very tired... closing eyes..."
+
+  dead:
+  - "... And the circus won't have their sword swallower anymore..."
+  - "Found a cat. Ferocious one. Big tooths, very fast, uh? It has friends!?"
+  - "Found a dragon. Now there's toasted meat for lunch."
+  - "Fishing can be very funny. Found a very big one!"
+  - "Found thieves... They think that I can be so easily stolen?"
+
+  memories: "In memory of %{name}"

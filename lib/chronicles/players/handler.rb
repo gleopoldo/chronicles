@@ -30,9 +30,8 @@ module Chronicles
           Actions.do_action(@player, @random)
         when :quit
           @player.die
+          @player
         end
-
-        @player
       end
     end
   end

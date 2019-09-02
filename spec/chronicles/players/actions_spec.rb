@@ -23,6 +23,11 @@ RSpec.describe Chronicles::Players::Actions do
 
       expect(player).to be_wandering
     end
+
+    it "returns a string" do
+      verses = described_class.do_action(build_player)
+      expect(verses).to be_a_kind_of(String)
+    end
   end
 
   context "when player is hunting" do
@@ -40,7 +45,7 @@ RSpec.describe Chronicles::Players::Actions do
     it "may kill the player in an accident" do
       random = instance_double(Chronicles::Players::Random,
                                try_hunt: double(success?: false,
-                                                die_reason: "Found a ferocious cat"))
+                                                dead?: true))
       player = build_player
       player.hunt
 
@@ -48,13 +53,21 @@ RSpec.describe Chronicles::Players::Actions do
 
       expect(player).to be_dead
     end
+
+    it "returns a string" do
+      player = build_player
+      player.hunt
+
+      verses = described_class.do_action(player)
+      expect(verses).to be_a_kind_of(String)
+    end
   end
 
   context "when player is sleeping" do
     it "may keep sleeping" do
       random = instance_double(Chronicles::Players::Random,
                                try_wake_up: double(success?: false,
-                                                   die_reason: nil))
+                                                   dead?: false))
       player = build_player
       player.take_a_nap
 
@@ -67,7 +80,7 @@ RSpec.describe Chronicles::Players::Actions do
       random = instance_double(Chronicles::Players::Random,
                                try_wake_up: double(
                                  success?: false,
-                                 die_reason: "Lots of mosquitoes can kill"))
+                                 dead?: true))
       player = build_player
       player.take_a_nap
 
@@ -85,6 +98,14 @@ RSpec.describe Chronicles::Players::Actions do
       described_class.do_action(player, random)
 
       expect(player).to be_wandering
+    end
+
+    it "returns a string" do
+      player = build_player
+      player.take_a_nap
+
+      verses = described_class.do_action(player)
+      expect(verses).to be_a_kind_of(String)
     end
   end
 end

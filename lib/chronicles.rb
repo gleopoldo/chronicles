@@ -1,12 +1,16 @@
 require "concurrent"
 require "concurrent-edge"
+require "i18n"
 
 require "chronicles/version"
 require "chronicles/event_handler"
 require "chronicles/game"
 require "chronicles/player"
+require "chronicles/runner"
 
 module Chronicles
   class Error < StandardError; end
-  # Your code goes here...
+
+  I18n.load_path << Dir[File.expand_path("config/locales") + "/*.yml"]
+  I18n.default_locale = :en
 end
