@@ -13,7 +13,7 @@ module Chronicles
       end
 
       def try_hunt
-        Action.new(::Random.rand(2).zero?)
+        Action.new(::Random.rand(3).zero?)
       end
     end
   end
