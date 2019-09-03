@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "chronicles"
+
+# Starting things up
+#
+# In the future we can customize the default host and port
+# For now it just does the job
+Chronicles.start("0.0.0.0", 40000)
+
+# Let's keep all threads up and running, avoiding the
+# brutal kill of other threads when the main one finishes here.
+sleep

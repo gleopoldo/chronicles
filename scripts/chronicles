@@ -12,7 +12,17 @@ case "$command_name" in
       --build-arg workdir="$image_workdir" \
       -t "$image_name" .
   ;;
-  run)
+
+  bash)
     docker run --rm -it -v "$PWD":"$image_workdir" -p "40000:40000" "$image_name"
+  ;;
+
+  run)
+    echo "Bringing server up! Listening on 0.0.0.0:40000"
+    docker run --rm -it \
+      -v "$PWD":"$image_workdir" \
+      -p "40000:40000" \
+      "$image_name" \
+      bin/run
   ;;
 esac
