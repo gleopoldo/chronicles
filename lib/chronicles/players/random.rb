@@ -6,14 +6,20 @@ module Chronicles
     # The intent here is to isolate randomicity from deterministic function
     # calls. This is easier to test, then.
     class Random
-      Action = Struct.new(:success?)
+      Action = Struct.new(:success?, :dead?)
 
       def try_wake_up
-        Action.new(::Random.rand(2).zero?)
+        Action.new(roll_dices_with_success?(2), roll_dices_with_success?(2))
       end
 
       def try_hunt
-        Action.new(::Random.rand(3).zero?)
+        Action.new(roll_dices_with_success?, roll_dices_with_success?)
+      end
+
+      private
+
+      def roll_dices_with_success?(possibilities = 3)
+        ::Random.rand(possibilities).zero?
       end
     end
   end

@@ -24,9 +24,9 @@ RSpec.describe Chronicles::Players::Handler do
 
     it "returns the player" do
       handler = described_class.start("Olaf")
-      player = described_class.act(handler)
+      string = described_class.act(handler)
 
-      expect(player).to be_a_kind_of(Chronicles::Players::Stats)
+      expect(string).to be_a_kind_of(String)
     end
   end
 
