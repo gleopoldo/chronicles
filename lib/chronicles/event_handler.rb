@@ -19,19 +19,23 @@ module Chronicles
       when :start
         @socket.puts @journey.prepare
       when :got
-        @socket.puts @journey.start(args.first)
-
-        @journey.run do |deeds|
-          @socket.puts deeds
-          sleep 1
-        end
-
-        @socket.puts @journey.finish
-        @socket.close
+        join_new_adventure(args.first)
       end
     end
 
     private
+
+    def join_new_adventure(player_name)
+      @socket.puts @journey.start(player_name)
+
+      @journey.run do |deeds|
+        @socket.puts deeds
+        sleep 1
+      end
+
+      @socket.puts @journey.finish
+      @socket.close
+    end
 
     def listen
       Thread.new do

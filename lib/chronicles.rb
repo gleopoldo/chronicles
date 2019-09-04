@@ -3,7 +3,6 @@ require "concurrent-edge"
 require "i18n"
 
 require "chronicles/version"
-require "chronicles/game"
 require "chronicles/player"
 require "chronicles/bard"
 require "chronicles/journey"
