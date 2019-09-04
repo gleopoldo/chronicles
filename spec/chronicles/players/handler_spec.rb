@@ -17,7 +17,7 @@ RSpec.describe Chronicles::Players::Handler do
     end
   end
 
-  describe "#act" do
+  describe ".act" do
     it "delegates to Action class with correct args" do
       bard = build_bard(player_name: "Olaf")
       allow(Chronicles::Players::Actions).to receive(:do_action)
@@ -48,13 +48,30 @@ RSpec.describe Chronicles::Players::Handler do
     end
   end
 
-  describe "#quit" do
+  describe ".quit" do
     it "forces the player to commit suicide" do
       bard = build_bard(player_name: "Olaf")
       handler = described_class.start("Olaf", bard)
       player = described_class.quit(handler)
 
       expect(player).to be_dead
+    end
+  end
+
+  describe ".player_died?" do
+    it "returns true when the player is dead" do
+      bard = build_bard(player_name: "Olaf")
+      handler = described_class.start("Olaf", bard)
+      described_class.quit(handler)
+
+      expect(described_class.player_died?(handler)).to be true
+    end
+
+    it "returns false otherwise" do
+      bard = build_bard(player_name: "Olaf")
+      handler = described_class.start("Olaf", bard)
+
+      expect(described_class.player_died?(handler)).to be false
     end
   end
 end

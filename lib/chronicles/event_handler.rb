@@ -6,7 +6,7 @@ module Chronicles
 
     def initialize(socket)
       @socket = socket
-      @bard = Bard.new
+      @journey = Journey.new
 
       listen
       tell :start
@@ -17,21 +17,16 @@ module Chronicles
 
       case command
       when :start
-        @socket.puts @bard.salute
+        @socket.puts @journey.prepare
       when :got
-        name = args.first
-        @bard.remember("name", name)
-        @player = Players::Handler.start(name, @bard)
-        @socket.puts @bard.start_lyrics
+        @socket.puts @journey.start(args.first)
 
-        until Players::Handler.get_player(@player).dead? do
-          deeds = Players::Handler.act(@player)
-
+        @journey.run do |deeds|
           @socket.puts deeds
           sleep 1
         end
 
-        @socket.puts @bard.posthumous_words
+        @socket.puts @journey.finish
         @socket.close
       end
     end

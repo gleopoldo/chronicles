@@ -13,6 +13,10 @@ module Chronicles
         ref.ask(:get_player).value
       end
 
+      def self.player_died?(ref)
+        get_player(ref).dead?
+      end
+
       def self.quit(ref)
         ref.ask(:quit).value
       end

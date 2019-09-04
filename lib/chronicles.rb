@@ -3,11 +3,12 @@ require "concurrent-edge"
 require "i18n"
 
 require "chronicles/version"
-require "chronicles/event_handler"
 require "chronicles/game"
 require "chronicles/player"
 require "chronicles/bard"
+require "chronicles/journey"
 require "chronicles/runner"
+require "chronicles/event_handler"
 
 module Chronicles
   class Error < StandardError; end
