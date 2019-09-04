@@ -11,7 +11,7 @@ module Chronicles
 
     def start(player_name)
       @bard.remember("name", player_name)
-      @player = @handler.start(player_name, @bard)
+      @player = @handler.start(player_name)
 
       @bard.start_lyrics
     end
@@ -19,6 +19,7 @@ module Chronicles
     def run
       until @handler.player_died?(@player) do
         deeds = @handler.act(@player)
+        @bard.take_notes(deeds)
 
         yield(deeds) if block_given?
       end

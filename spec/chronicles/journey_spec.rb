@@ -36,7 +36,7 @@ RSpec.describe Chronicles::Journey do
       allow(handler).to receive(:start).and_return double
       journey.start("Olaf")
 
-      expect(handler).to have_received(:start).with("Olaf", bard)
+      expect(handler).to have_received(:start).with("Olaf")
     end
   end
 
@@ -70,6 +70,21 @@ RSpec.describe Chronicles::Journey do
       expect do |expectation|
         journey.run(&expectation)
       end.to yield_successive_args("text 1", "text 2")
+    end
+
+    it "records the player deeds" do
+      bard = Chronicles::Bard.new
+      player = double
+      handler = class_double(Chronicles::Players::Handler, start: player)
+
+      allow(handler).to receive(:player_died?).and_return(false, false, true)
+      allow(handler).to receive(:act).and_return("text 1", "text 2")
+
+      journey = described_class.new(bard: bard, handler: handler)
+      journey.start("Olaf")
+      journey.run
+
+      expect(bard.compose).to include "text 1\ntext 2"
     end
   end
 
