@@ -7,6 +7,18 @@ module Chronicles
       @viking_info = {}
     end
 
+    def name
+      "Sverri, the Bard"
+    end
+
+    def destination
+      "gabrielleopferreira@gmail.com"
+    end
+
+    def lyrics_title
+      "The travels of #{protagonist}"
+    end
+
     def take_notes(event)
       @verses << event
     end

@@ -1,7 +1,8 @@
 module Chronicles
   class Journey
-    def initialize(bard: Bard.new, handler: Players::Handler)
+    def initialize(herald: Herald.new, bard: Bard.new, handler: Players::Handler)
       @bard = bard
+      @herald = herald
       @handler = handler
     end
 
@@ -27,6 +28,7 @@ module Chronicles
 
     def finish
       @bard.posthumous_words
+      @herald.send_message!(@bard)
     end
   end
 end
