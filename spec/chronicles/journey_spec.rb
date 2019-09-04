@@ -1,6 +1,10 @@
 require "spec_helper"
 
 RSpec.describe Chronicles::Journey do
+  before do
+    allow_any_instance_of(Chronicles::Herald).to receive(:send_message!)
+  end
+
   describe "#prepare" do
     it "returns the bard salutation" do
       bard = instance_double(Chronicles::Bard, salute: "Hi!")

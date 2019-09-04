@@ -46,7 +46,10 @@ module Chronicles
     end
 
     def posthumous_words
-      I18n.t(".in_memories", name: protagonist).sample
+      words = I18n.t(".in_memories", name: protagonist).sample
+      take_notes(words)
+
+      words
     end
   end
 end

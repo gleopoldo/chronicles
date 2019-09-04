@@ -27,8 +27,10 @@ module Chronicles
     end
 
     def finish
-      @bard.posthumous_words
+      words = @bard.posthumous_words
       @herald.send_message!(@bard)
+
+      words
     end
   end
 end

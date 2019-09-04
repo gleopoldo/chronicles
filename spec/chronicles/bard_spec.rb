@@ -61,6 +61,15 @@ RSpec.describe Chronicles::Bard do
 
       expect(ends).to include bard.posthumous_words
     end
+
+    it "also take notes" do
+      bard = described_class.new
+      bard.remember(:name, "Bob")
+      last_words = bard.posthumous_words
+
+
+      expect(bard.compose).to include last_words
+    end
   end
 
   describe "#name" do
