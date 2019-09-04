@@ -2,21 +2,20 @@ module Chronicles
   # someone to tell about your histories, and propagate your name
   # accross the history
   class Bard
+    attr_reader :name
+
     def initialize
+      @name ||= I18n.t(".names").sample
       @verses = []
       @viking_info = {}
     end
 
-    def name
-      "Sverri, the Bard"
+    def lyrics_title
+      @lyrics_title ||= I18n.t(".titles", name: protagonist).sample
     end
 
     def destination
       "gabrielleopferreira@gmail.com"
-    end
-
-    def lyrics_title
-      "The travels of #{protagonist}"
     end
 
     def take_notes(event)

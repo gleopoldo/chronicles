@@ -62,4 +62,23 @@ RSpec.describe Chronicles::Bard do
       expect(ends).to include bard.posthumous_words
     end
   end
+
+  describe "#name" do
+    it "returns the bard name" do
+      bard = described_class.new
+      names = I18n.t(".names", name: "Bob")
+
+      expect(names).to include(bard.name)
+    end
+  end
+
+  describe "#lyrics_title" do
+    it "returns a title for the lyrics" do
+      bard = described_class.new
+      bard.remember(:name, "Bob")
+      titles = I18n.t(".titles", name: "Bob")
+
+      expect(titles).to include bard.lyrics_title
+    end
+  end
 end
