@@ -18,10 +18,23 @@ RSpec.describe Chronicles::Players::Actions do
     it "may keep wandering" do
       player = build_player
       random = instance_double(Chronicles::Players::Random,
-                               try_hunt: double(success?: false))
+                               try_hunt: double(success?: false),
+                               try_sleep: double(success?: false))
+
       described_class.do_action(player, random)
 
       expect(player).to be_wandering
+    end
+
+    it "may fall asleep" do
+      player = build_player
+      random = instance_double(Chronicles::Players::Random,
+                               try_hunt: double(success?: false),
+                               try_sleep: double(success?: true))
+
+      described_class.do_action(player, random)
+
+      expect(player).to be_sleeping
     end
 
     it "returns a string" do

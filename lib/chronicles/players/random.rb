@@ -16,6 +16,10 @@ module Chronicles
         Action.new(roll_dices_with_success?, roll_dices_with_success?)
       end
 
+      def try_sleep
+        Action.new(roll_dices_with_success?(4), roll_dices_with_success?(4))
+      end
+
       private
 
       def roll_dices_with_success?(possibilities = 3)

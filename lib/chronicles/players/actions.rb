@@ -1,17 +1,40 @@
 module Chronicles
   module Players
     class Actions
-      def self.do_action(player, random = Random.new)
-        case true
-        when player.wandering?
-          action = random.try_hunt
-          player.hunt if action.success?
+      class << self
+        def do_action(player, random = Random.new)
+          case true
+          when player.wandering?
+            wandering(player, random)
 
-        when player.hunting?
+          when player.hunting?
+            hunting(player, random)
+
+          when player.sleeping?
+            sleeping(player, random)
+          end
+
+          I18n.t(player.state_name).sample
+        end
+
+        private
+
+        def wandering(player, random)
+          action = random.try_hunt
+          if action.success?
+            player.hunt
+          else
+            action = random.try_sleep
+            player.take_a_nap if action.success?
+          end
+        end
+
+        def hunting(player, random)
           action = random.try_hunt
           player.die if !action.success?
+        end
 
-        when player.sleeping?
+        def sleeping(player, random)
           action = random.try_wake_up
           if action.success?
             player.wake_up
@@ -19,8 +42,6 @@ module Chronicles
             player.die
           end
         end
-
-        I18n.t(player.state_name).sample
       end
     end
   end
