@@ -21,12 +21,11 @@ module Chronicles
       when :got
         name = args.first
         @bard.remember("name", name)
-        @player = Players::Handler.start(name)
+        @player = Players::Handler.start(name, @bard)
         @socket.puts @bard.start_lyrics
 
         until Players::Handler.get_player(@player).dead? do
           deeds = Players::Handler.act(@player)
-          @bard.take_notes(deeds)
 
           @socket.puts deeds
           sleep 1

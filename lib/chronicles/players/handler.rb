@@ -1,8 +1,8 @@
 module Chronicles
   module Players
     class Handler < Concurrent::Actor::Context
-      def self.start(name, opts = {})
-        spawn(name: :player_handler, link: true, args: [name, opts])
+      def self.start(name, bard, opts = {})
+        spawn(name: :player_handler, link: true, args: [name, bard, opts])
       end
 
       def self.act(ref)
@@ -17,8 +17,9 @@ module Chronicles
         ref.ask(:quit).value
       end
 
-      def initialize(name, opts)
+      def initialize(name, bard, opts)
         @player = Stats.new(name)
+        @bard = bard
         @random = opts.fetch(:random, Players::Random.new)
       end
 
@@ -27,7 +28,10 @@ module Chronicles
         when :get_player
           @player
         when :act
-          Actions.do_action(@player, @random)
+          deeds = Actions.do_action(@player, @random)
+          @bard.take_notes deeds
+
+          deeds
         when :quit
           @player.die
           @player

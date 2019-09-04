@@ -38,7 +38,10 @@ module Chronicles
         while true
           break if server.closed?
 
-          tell [:accept, server.accept]
+          begin
+            tell [:accept, server.accept]
+          rescue Errno::EINVAL
+          end
         end
       end
     end
