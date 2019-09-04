@@ -16,7 +16,6 @@ module Chronicles
       end
 
       def smtp_address
-        puts ENV["SMTP_ADDRESS"].to_s
         ENV["SMTP_ADDRESS"].to_s
       end
 
