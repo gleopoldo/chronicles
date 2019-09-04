@@ -15,11 +15,11 @@ module Chronicles
 
       case command
       when :start
-        @socket.puts "Hello! What's your name, warrior?"
+        @socket.puts I18n.t(".welcome", name: name).sample
       when :got
         name = args.first
         @player = Players::Handler.start(name)
-        @socket.puts "#{name} has arrived on Savagelands on a magnific boat."
+        @socket.puts I18n.t(".arrived", name: name).sample
 
         until Players::Handler.get_player(@player).dead? do
           response = Players::Handler.act(@player)
@@ -27,7 +27,7 @@ module Chronicles
           sleep 1
         end
 
-        @socket.puts I18n.t(:memories, name: name)
+        @socket.puts I18n.t(:in_memories, name: name).sample
         @socket.close
       end
     end

@@ -1,4 +1,15 @@
 en:
+  welcome:
+  - "AAAARG! So, do you want gold? Glory? Reputation? Ha, ha! What's your name?"
+  - "I don't know you yet! What's your name?"
+  - "Do you want to join us? Let's start with your name"
+
+  arrived:
+  - "%{name} has arrived on Savagelands on a magnificent boat."
+  - "%{name} just wake up on a strange land, surrounded by a continouus fog. What kind of surprises may be hidden there?"
+  - "%{name} started a military campaign to conquest the south lands, rich in gold, natural wonders and cattle!"
+  - "%{name} joined a travel to the New World... The objective? Just be a viking!"
+
   wandering:
   - "Searching for gold. Nope! Not this rainbow..."
   - "Playing dices with dogs. Did they see my poker-face?"
@@ -39,4 +50,7 @@ en:
   - "Someone challenged me to beat the bull. Accepted, of course!"
   - "Too much rain! There is a cave with bones in the floor... seems safe."
 
-  memories: "In memory of %{name}"
+  in_memories:
+  - "\u271D - In memory of %{name} - \u271D"
+  - "\u271D - And that's the last time someone has seen %{name} - \u271D"
+  - "\u271D - %{name} went to Valhala - \u271D"
