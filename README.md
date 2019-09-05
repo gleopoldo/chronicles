@@ -1,8 +1,23 @@
 # Chronicles
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/chronicles`. To experiment with that code, run `bin/console` for an interactive prompt.
+Aarg! This project is fot those with brave hearts, those who never flee a fight!
 
-TODO: Delete this and the text above, and describe your gem
+Do you want to join on a incredible adventure? Want to have your name placed
+in the hall of fame, or remembered by the history?
+
+This is the right place!
+
+We have several bots designed using actor models and an erlang-like interfaces
+whose message trading is responsible for creating random events that compose an 
+epic journey using a Middle Ages theme.
+
+Each time you join a new journey, a new, completely different end may arrise.
+
+But hands on! Nobody would care about this unless you could have your epics 
+narrated by a bard - those guys from the middle age that were paid to tell
+histories about someone greatest deeds.
+
+Are you lucky enought to create an epic journey? Try it yourself.
 
 ## Installation
 
@@ -22,7 +37,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Running in development:
+
+```
+bin/run
+```
+
+Sending e-mails for people you like:
+
+```
+SMTP_USER=<user> SMTP_PASSWORD=<password> SMTP_ADDRESS=<host> SMTP_PORT=<port> bin/run --recipient <e-mail>
+```
 
 ## Development
 
