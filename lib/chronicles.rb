@@ -3,10 +3,12 @@ require "concurrent-edge"
 require "i18n"
 
 require "chronicles/version"
-require "chronicles/event_handler"
-require "chronicles/game"
 require "chronicles/player"
+require "chronicles/bard"
+require "chronicles/herald"
+require "chronicles/journey"
 require "chronicles/runner"
+require "chronicles/event_handler"
 
 module Chronicles
   class Error < StandardError; end
@@ -14,7 +16,7 @@ module Chronicles
   I18n.load_path << Dir[File.expand_path("config/locales") + "/*.yml"]
   I18n.default_locale = :en
 
-  def self.start(host, port)
-    Runner.start(host, port)
+  def self.start(host, port, options)
+    Runner.start(host, port, options)
   end
 end

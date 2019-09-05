@@ -1,11 +1,13 @@
 module Chronicles
   class EventHandler < Concurrent::Actor::Context
-    def self.start(socket)
-      spawn(name: :handler, link: true, args: [socket])
+    def self.start(socket, options = {})
+      spawn(name: :handler, link: true, args: [socket, options])
     end
 
-    def initialize(socket)
+    def initialize(socket, options)
       @socket = socket
+      @journey = Journey.new(options)
+
       listen
       tell :start
     end
@@ -15,24 +17,25 @@ module Chronicles
 
       case command
       when :start
-        @socket.puts I18n.t(".welcome", name: name).sample
+        @socket.puts @journey.prepare
       when :got
-        name = args.first
-        @player = Players::Handler.start(name)
-        @socket.puts I18n.t(".arrived", name: name).sample
-
-        until Players::Handler.get_player(@player).dead? do
-          response = Players::Handler.act(@player)
-          @socket.puts response
-          sleep 1
-        end
-
-        @socket.puts I18n.t(:in_memories, name: name).sample
-        @socket.close
+        join_new_adventure(args.first)
       end
     end
 
     private
+
+    def join_new_adventure(player_name)
+      @socket.puts @journey.start(player_name)
+
+      @journey.run do |deeds|
+        @socket.puts deeds
+        sleep 1
+      end
+
+      @socket.puts @journey.finish
+      @socket.close
+    end
 
     def listen
       Thread.new do

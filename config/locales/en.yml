@@ -1,4 +1,21 @@
 en:
+  names:
+  - "Sverri, the Bard"
+  - "Homer, the Loose Tongue"
+  - "Ivarr, the talkative"
+  - "Offa, the Stupid"
+
+  titles:
+  - "Small adventures of %{name}"
+  - "The epic journey to Hell from %{name}"
+  - "Words of a missing person"
+  - "The last deeds of a great warrior"
+  - "%{name} lyrics"
+  - "%{name}: Blood, Battles and Glory"
+  - "A journey to unknown, by %{name}"
+  - "%{name} - challenging the destiny"
+  - "The travels of %{name}"
+
   welcome:
   - "AAAARG! So, do you want gold? Glory? Reputation? Ha, ha! What's your name?"
   - "I don't know you yet! What's your name?"

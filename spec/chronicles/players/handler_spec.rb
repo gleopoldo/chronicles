@@ -9,7 +9,7 @@ RSpec.describe Chronicles::Players::Handler do
     end
   end
 
-  describe "#act" do
+  describe ".act" do
     it "delegates to Action class with correct args" do
       allow(Chronicles::Players::Actions).to receive(:do_action)
       random_seed = double
@@ -30,12 +30,27 @@ RSpec.describe Chronicles::Players::Handler do
     end
   end
 
-  describe "#quit" do
+  describe ".quit" do
     it "forces the player to commit suicide" do
       handler = described_class.start("Olaf")
       player = described_class.quit(handler)
 
       expect(player).to be_dead
+    end
+  end
+
+  describe ".player_died?" do
+    it "returns true when the player is dead" do
+      handler = described_class.start("Olaf")
+      described_class.quit(handler)
+
+      expect(described_class.player_died?(handler)).to be true
+    end
+
+    it "returns false otherwise" do
+      handler = described_class.start("Olaf")
+
+      expect(described_class.player_died?(handler)).to be false
     end
   end
 end
