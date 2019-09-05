@@ -18,6 +18,9 @@ RSpec.describe Chronicles::Runner do
     it "allows a communication setup to be made" do
       port = 40000
       host = "0.0.0.0"
+      bard = Chronicles::Bard.new
+
+      allow(Chronicles::Bard).to receive(:new).and_return bard
 
       server = described_class.start(host, port)
       socket = TCPSocket.new(host, port)
@@ -27,9 +30,15 @@ RSpec.describe Chronicles::Runner do
 
       name = "Olaf"
       socket.puts name
-      ask = socket.gets.chomp
 
-      expect(ask).to be_a_kind_of(String)
+      verses = ""
+
+      while(output = socket.gets) do
+        verses << output if output
+      end
+
+      expect(verses.strip.force_encoding("ISO-8859-1"))
+        .to eq bard.compose.force_encoding("ISO-8859-1")
     end
   end
 end

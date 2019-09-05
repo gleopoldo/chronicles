@@ -1,10 +1,6 @@
 require "spec_helper"
 
 RSpec.describe Chronicles::Journey do
-  before do
-    allow_any_instance_of(Chronicles::Herald).to receive(:send_message!)
-  end
-
   describe "#prepare" do
     it "returns the bard salutation" do
       bard = instance_double(Chronicles::Bard, salute: "Hi!")
@@ -100,6 +96,30 @@ RSpec.describe Chronicles::Journey do
       journey = described_class.new(bard: bard)
 
       expect(journey.finish).to eq "the end"
+    end
+
+    it "sends a message when a destination e-mail is given as option" do
+      herald = instance_double(Chronicles::Herald, send_message!: nil)
+      bard = instance_double(Chronicles::Bard, posthumous_words: "")
+      email = "sven.thebard@gmail.com"
+      journey = described_class.new(herald: herald,
+                                    bard: bard,
+                                    email: email)
+
+      journey.finish
+
+      expect(herald).to have_received(:send_message!).with(bard, email)
+    end
+
+    it "does not sends that message when no e-mail is provided" do
+      herald = instance_double(Chronicles::Herald, send_message!: nil)
+      bard = instance_double(Chronicles::Bard, posthumous_words: "")
+      journey = described_class.new(herald: herald,
+                                    bard: bard)
+
+      journey.finish
+
+      expect(herald).to_not have_received(:send_message!)
     end
   end
 end
