@@ -1,9 +1,10 @@
 module Chronicles
   class Journey
-    def initialize(herald: Herald.new, bard: Bard.new, handler: Players::Handler)
-      @bard = bard
-      @herald = herald
-      @handler = handler
+    def initialize(opts)
+      @bard = opts.fetch(:bard, Bard.new)
+      @email = opts.fetch(:email, nil)
+      @herald = opts.fetch(:herald, Herald.new)
+      @handler = opts.fetch(:handler, Players::Handler)
     end
 
     def prepare
@@ -28,7 +29,7 @@ module Chronicles
 
     def finish
       words = @bard.posthumous_words
-      @herald.send_message!(@bard)
+      @herald.send_message!(@bard, @email) unless @email.nil?
 
       words
     end

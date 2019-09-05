@@ -10,12 +10,14 @@ module Chronicles
   #
   # Who'll remember you if you can't share you deeds?
   class Herald
-    def send_message!(bard)
+    def send_message!(bard, email)
       Mailer.setup
+
+      puts email
 
       mail = Mail.new do
         from "hglocaweb@gmail.com"
-        to bard.destination
+        to email
         subject bard.lyrics_title
         body bard.compose
       end

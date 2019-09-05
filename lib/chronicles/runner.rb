@@ -2,18 +2,19 @@ require "socket"
 
 module Chronicles
   class Runner < Concurrent::Actor::Context
-    def self.start(host, port)
+    def self.start(host, port, options = {})
       server = TCPServer.new(host, port)
 
-      spawn(name: :runner, link: true, args: [server])
+      spawn(name: :runner, link: true, args: [server, options])
     end
 
     def self.stop(server)
       server.ask(:stop).value
     end
 
-    def initialize(server)
+    def initialize(server, options)
       @server = server
+      @options = options
       self << :start
     end
 
@@ -27,7 +28,7 @@ module Chronicles
         stop
       when :accept
         socket = args.first
-        EventHandler.start(socket)
+        EventHandler.start(socket, @options)
       end
     end
 

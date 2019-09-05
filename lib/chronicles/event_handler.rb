@@ -1,12 +1,12 @@
 module Chronicles
   class EventHandler < Concurrent::Actor::Context
-    def self.start(socket)
-      spawn(name: :handler, link: true, args: [socket])
+    def self.start(socket, options = {})
+      spawn(name: :handler, link: true, args: [socket, options])
     end
 
-    def initialize(socket)
+    def initialize(socket, options)
       @socket = socket
-      @journey = Journey.new
+      @journey = Journey.new(options)
 
       listen
       tell :start

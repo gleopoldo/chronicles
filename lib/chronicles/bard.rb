@@ -14,10 +14,6 @@ module Chronicles
       @lyrics_title ||= I18n.t(".titles", name: protagonist).sample
     end
 
-    def destination
-      "gabrielleopferreira@gmail.com"
-    end
-
     def take_notes(event)
       @verses << event
     end

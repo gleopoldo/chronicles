@@ -2,12 +2,30 @@
 
 require "bundler/setup"
 require "chronicles"
+require "dotenv/load"
+
+# Processing some CLI options
+require "optparse"
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: chronicles [options]"
+
+  # Recipient option
+  #
+  # You may want to pay to a herald to send your journey history
+  # to a friend, right?
+  opts.on("-r", "--recipient EMAIL", "Sends this journey to a friend via e-mail") do |r|
+    options[:email] = r
+  end
+end.parse!
 
 # Starting things up
 #
 # In the future we can customize the default host and port
 # For now it just does the job
-Chronicles.start("0.0.0.0", 40000)
+Chronicles.start("0.0.0.0", 40000, options)
 
 # Let's keep all threads up and running, avoiding the
 # brutal kill of other threads when the main one finishes here.
