@@ -23,6 +23,6 @@ case "$command_name" in
       -v "$PWD":"$image_workdir" \
       -p "40000:40000" \
       "$image_name" \
-      bin/run
+      bin/run $command_args
   ;;
 esac
