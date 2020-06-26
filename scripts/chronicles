@@ -11,6 +11,11 @@ case "$command_name" in
       --build-arg uid="$UID" \
       --build-arg workdir="$image_workdir" \
       -t "$image_name" .
+
+    docker run --rm \
+      --volume "$PWD:$image_workdir" \
+      "$image_name" \
+      bundle install
   ;;
 
   bash)
@@ -19,10 +24,19 @@ case "$command_name" in
 
   run)
     echo "Bringing server up! Listening on 0.0.0.0:40000"
+
     docker run --rm -it \
       -v "$PWD":"$image_workdir" \
       -p "40000:40000" \
       "$image_name" \
       bin/run $command_args
+  ;;
+
+  *)
+    echo "You spell strange words... I only understand these:"
+    echo
+    echo "chronicles setup              - sets up your dev environment"
+    echo "chronicles bash               - brings up a container and returns a bash console"
+    echo "chronicles run -r <recipient> - brings up the Chronicles TCP Server"
   ;;
 esac
