@@ -31,4 +31,12 @@ case "$command_name" in
       "$image_name" \
       bin/run $command_args
   ;;
+
+  *)
+    echo "You spell strange words... I only understand these:"
+    echo
+    echo "chronicles setup              - sets up your dev environment"
+    echo "chronicles bash               - brings up a container and returns a bash console"
+    echo "chronicles run -r <recipient> - brings up the Chronicles TCP Server"
+  ;;
 esac
